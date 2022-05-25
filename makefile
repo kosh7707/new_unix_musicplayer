@@ -5,21 +5,18 @@ INCLUDE_DIR := include
 SRC_DIR := src
 LIBS_DIR := libs
 
-.PHONY: clean all
+.PHONY: clean all build
 
 all: $(BUILD)/$(TARGET)
 
-$(BUILD)/$(TARGET): $(BUILD)/Player.o
-	$(CC) -o $@ $^
-
 $(BUILD)/textfilewriter.o: $(LIBS_DIR)/textfilewriter.c $(INCLUDE_DIR)/textfilewriter.h
-	$(CC) -o $@ $^
+	$(CC) -c $< -o $@
 
 $(BUILD)/linkedlist.o: $(LIBS_DIR)/linkedlist.c $(INCLUDE_DIR)/linkedlist.h $(INCLUDE_DIR)/node.h
-	$(CC) -o $@ $^
+	$(CC) -c $< -o $@
 
-$(BUILD)/Player.o: $(BUILD)/linkedlist.o $(BUILD)/textfilewriter.o
-	$(CC) -o $@ $^
+$(BUILD)/$(TARGET): $(SRC_DIR)/Player.c $(BUILD)/linkedlist.o $(BUILD)/textfilewriter.o
+	$(CC) $^ -o $@
 
 $(BUILD):
 	mkdir $(BUILD)
