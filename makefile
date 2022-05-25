@@ -18,6 +18,8 @@ SRCS  := $(wildcard $(TEST_DIR)/*.c)
 HEADERS := $(wildcard $(INCLUDE_DIR)/*.h)
 LIBS  := $(wildcard $(LIB_DIR)/*.c)
 OBJS  := $(LIBS:$(LIB_DIR)/%.c=$(BUILD_DIR)/$(OBJ_DIR)/%.o) 
+TARGET := MusicPlayer
+CXX := gcc -std=c11
 
 EXECS := $(SRCS:$(TEST_DIR)/%.c=$(BUILD_DIR)/$(EXEC_DIR)/%)
 
@@ -29,13 +31,16 @@ $(info MAKE_DIR $(MAKE_DIR) HEADERS $(HEADERS))
 GTEST_HEADERS = $(GTEST_DIR)/include/gtest/*.h \
                 $(GTEST_DIR)/include/gtest/internal/*.h
 
-all : build_dir $(EXECS)
+all : build_dir $(EXECS) $(BUILD_DIR)/$(TARGET)
 
 clean :
 	rm -rf $(EXECS) gtest.a gtest_main.a *.o $(BUILD_DIR)
 
 test :
 	$(EXECS)
+
+$(BUILD_DIR)/$(TARGET) : $(OBJS) $(SRC_DIR)/Player.c
+	$(CXX) $^ -o $@
 
 GTEST_SRCS_ = $(GTEST_DIR)/src/*.cc $(GTEST_DIR)/src/*.h $(GTEST_HEADERS)
 
