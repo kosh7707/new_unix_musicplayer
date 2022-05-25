@@ -5,10 +5,6 @@ INCLUDE_DIR := include
 SRC_DIR := src
 LIBS_DIR := libs
 
-.PHONY: clean all build
-
-all: $(BUILD)/$(TARGET)
-
 $(BUILD)/textfilewriter.o: $(LIBS_DIR)/textfilewriter.c $(INCLUDE_DIR)/textfilewriter.h
 	$(CC) -c $< -o $@
 
