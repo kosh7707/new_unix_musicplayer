@@ -1,7 +1,7 @@
 # new_unix_musicplayer
---- 2주차 텀프 ---
-꼭 자기 브랜치에서 개발해주세요! <br />
-고세화: leader <br />
-박남형: developer1 <br />
-차기은: developer2 <br />
+--- 2주차 텀프 --- <br>
+google test를 하고 PR해주셔야 합니다. <br>
+교수님의 project 파일들을 한번 참고해보세요! <br>
+
+
 
