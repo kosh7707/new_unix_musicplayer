@@ -1,5 +1,5 @@
-#include "../include/linkedlist.h"
-#include "../include/textfilewriter.h"
+#include "linkedlist.h"
+#include "textfilewriter.h"
 
 int main() {
     int N; scanf("%d", &N);
