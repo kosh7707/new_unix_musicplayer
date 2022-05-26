@@ -34,7 +34,7 @@ all : build_dir $(BUILD_DIR)/$(TARGET)
 
 $(BUILD_DIR)/$(TARGET) : $(OBJS) $(SRC_DIR)/Player.c
 	$(CXX) $(CPPFLAGS) $(CXXFLAGS) -I$(INCLUDE_DIR) -lpthread $^ -o $@
-
+  
 clean :
 	rm -rf $(EXECS) gtest.a gtest_main.a *.o $(BUILD_DIR)
 
