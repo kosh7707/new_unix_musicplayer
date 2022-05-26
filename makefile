@@ -14,7 +14,6 @@ CPPFLAGS += -isystem $(GTEST_DIR)/include
 
 CXXFLAGS += -g -Wall -Wextra -pthread
 
-TESTS  = test_player
 SRCS  := $(wildcard $(TEST_DIR)/*.c)
 HEADERS := $(wildcard $(INCLUDE_DIR)/*.h)
 LIBS  := $(wildcard $(LIB_DIR)/*.c)
@@ -31,7 +30,7 @@ $(info MAKE_DIR $(MAKE_DIR) HEADERS $(HEADERS))
 GTEST_HEADERS = $(GTEST_DIR)/include/gtest/*.h \
                 $(GTEST_DIR)/include/gtest/internal/*.h
 
-all : build_dir $(BUILD_DIR)/$(TARGET)
+all : build_dir $(BUILD_DIR)/$(TARGET) 
 
 $(BUILD_DIR)/$(TARGET) : $(OBJS) $(SRC_DIR)/Player.c
 	$(CXX) $(CPPFLAGS) $(CXXFLAGS) -I$(INCLUDE_DIR) -lpthread $^ -o $@
@@ -39,7 +38,7 @@ $(BUILD_DIR)/$(TARGET) : $(OBJS) $(SRC_DIR)/Player.c
 clean :
 	rm -rf $(EXECS) gtest.a gtest_main.a *.o $(BUILD_DIR)
 
-test : build_dir
+test : build_dir $(EXECS)  
 	$(EXECS)
 
 GTEST_SRCS_ = $(GTEST_DIR)/src/*.cc $(GTEST_DIR)/src/*.h $(GTEST_HEADERS)
