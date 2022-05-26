@@ -1,9 +1,12 @@
 #include "gtest/gtest.h"
-#include "../include/linkedlist.h"
-#include "../include/textfilewriter.h"
+#include "linkedlist.h"
+#include "textfilewriter.h"
+#include <string.h>
+
+// TEST(TestSuiteName, TestName)
+// TEST(TestPlayer, Add)
 
 TEST(TestPlayer, Add) {
-	printf("TEST ADD");
-	EXPECT_EQ(1, 1);
+    printf("Test Add\n");
+    EXPECT_EQ(0, 0);
 }
-
