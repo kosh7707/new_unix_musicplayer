@@ -19,30 +19,30 @@ SRCS  := $(wildcard $(TEST_DIR)/*.c)
 HEADERS := $(wildcard $(INCLUDE_DIR)/*.h)
 LIBS  := $(wildcard $(LIB_DIR)/*.c)
 OBJS  := $(LIBS:$(LIB_DIR)/%.c=$(BUILD_DIR)/$(OBJ_DIR)/%.o)
-TEST_EXECS := $(SRCS:$(TEST_DIR)/%.c=$(BUILD_DIR)/$(EXEC_DIR)/%)
+EXECS := $(SRCS:$(TEST_DIR)/%.c=$(BUILD_DIR)/$(EXEC_DIR)/%)
 
 BUILD_SUB_DIR := $(OBJ_DIR) $(EXEC_DIR)
 MAKE_DIR := $(BUILD_DIR) $(BUILD_SUB_DIR:%=$(BUILD_DIR)/%)
 
 $(info SRCS $(SRCS) LIBS $(LIBS))
-$(info OBJS $(OBJS) TEST_EXECS $(TEST_EXECS))
+$(info OBJS $(OBJS) EXECS $(EXECS))
 $(info MAKE_DIR $(MAKE_DIR) HEADERS $(HEADERS))
 
 GTEST_HEADERS = $(GTEST_DIR)/include/gtest/*.h \
                 $(GTEST_DIR)/include/gtest/internal/*.h
-
-GTEST_SRCS_ = $(GTEST_DIR)/src/*.cc $(GTEST_DIR)/src/*.h $(GTEST_HEADERS)
 
 all : build_dir $(BUILD_DIR)/$(TARGET)
 
 $(BUILD_DIR)/$(TARGET) : $(OBJS) $(SRC_DIR)/Player.c
 	$(CXX) $(CPPFLAGS) $(CXXFLAGS) -I$(INCLUDE_DIR) -lpthread $^ -o $@
 
-test :
-	$(TEST_EXECS)
+clean :
+	rm -rf $(EXECS) gtest.a gtest_main.a *.o $(BUILD_DIR)
 
-$(TEST_EXECS) : $(SRCS) $(OBJS) $(HEADERS) gtest-all.o
-	$(CXX) $(CPPFLAGS) $(CXXFLAGS) -I$(INCLUDE_DIR) -lpthread $^ -o $@
+test : build_dir
+	$(EXECS)
+
+GTEST_SRCS_ = $(GTEST_DIR)/src/*.cc $(GTEST_DIR)/src/*.h $(GTEST_HEADERS)
 
 gtest-all.o : $(GTEST_SRCS_)
 	$(CXX) $(CPPFLAGS) -I$(GTEST_DIR) $(CXXFLAGS) -c \
@@ -69,5 +69,5 @@ build_dir : |$(MAKE_DIR)
 $(MAKE_DIR):
 	mkdir -p $(MAKE_DIR)
 
-clean :
-	rm -rf $(TEST_EXECS) gtest.a gtest_main.a *.o $(BUILD_DIR)
+$(EXECS) : $(SRCS) $(OBJS) $(HEADERS) gtest-all.o
+	$(CXX) $(CPPFLAGS) $(CXXFLAGS) -I$(INCLUDE_DIR) -lpthread $^ -o $@
