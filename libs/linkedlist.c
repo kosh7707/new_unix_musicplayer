@@ -26,11 +26,22 @@ size_t size() {
 }
 
 void print(){
-	
+    //재생목록을 콘솔에 출력함
+    Node* temp = _head;
+    printf("LinkedList [ ");
+    while(temp != NULL){
+        printf("%s ",temp->data);
+        temp = temp->next;
+    }
+    printf("]\n");	
 }
 
 void print_file(FILE* stream){
-
+    if(stream == NULL) return;
+    char buffer[1000]={0,};
+    fread(buffer,1,sizeof(buffer),stream);
+    printf("%s",buffer);
+    fclose(stream);
 }
 
 void clear(){
