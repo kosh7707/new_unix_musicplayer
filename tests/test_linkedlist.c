@@ -183,25 +183,69 @@ EXPECT_STREQ(last_node()->data, music_titles[0]);
 clear();
 }
 
-/*TEST(TestLinkedList, NextAndPrev) {
-    // int NUM_OF_MUSIC = 3;
-    // char** music_titles = NULL;
-    // music_titles = (char**)malloc(sizeof(char*) * NUM_OF_MUSIC);
-    // for (int i=0; i < NUM_OF_MUSIC; i++){
-    //     music_titles[i] = (char*)malloc(sizeof(char) * MAX_TITLE_SIZE);
-    // }
-    // music_titles[0] = (char*)"Hello";
-    // music_titles[1] = (char*)"Enemy";
-    // music_titles[2] = (char*)"abc";
+
+TEST(TestLinkedList, NextAndPrev) {
+    //next,prev_testcase
+     int NUM_OF_MUSIC = 3;
+     char** music_titles = NULL;
+     music_titles = (char**)malloc(sizeof(char*) * NUM_OF_MUSIC);
+     for (int i=0; i < NUM_OF_MUSIC; i++){
+         music_titles[i] = (char*)malloc(sizeof(char) * MAX_TITLE_SIZE);
+     }
+     music_titles[0] = (char*)"Hello";
+     music_titles[1] = (char*)"Enemy";
+     music_titles[2] = (char*)"abc";
     append_left(sizeof(music_titles[0]), music_titles[0]);
     Node* cur_node = append_left(sizeof(music_titles[1]), music_titles[1]);
     EXPECT_STREQ(cur_node->data, music_titles[1]);
-    EXPECT_STREQ(next()->data, music_titles[0]);
+    cur_node = next();
+    EXPECT_STREQ(cur_node->data, music_titles[0]);
     cur_node = append(sizeof(music_titles[2]), music_titles[2]);
     EXPECT_STREQ(cur_node->data, music_titles[2]);
-    EXPECT_STREQ(prev()->data, music_titles[0]);
+    cur_node = prev();
+    EXPECT_STREQ(cur_node->data, music_titles[1]);
     clear();
-}*/
+}
+
+TEST(TestLinkedList, GetNode){
+//getNode_testcase
+    int NUM_OF_MUSIC = 3;
+    char** music_titles = NULL;
+    music_titles = (char**)malloc(sizeof(char*) * NUM_OF_MUSIC);
+    for (int i=0; i < NUM_OF_MUSIC; i++){
+        music_titles[i] = (char*)malloc(sizeof(char) * MAX_TITLE_SIZE);
+    }
+    music_titles[0] = (char*)"Hello";
+    music_titles[1] = (char*)"Enemy";
+    music_titles[2] = (char*)"abc";
+    append(sizeof(music_titles[0]), music_titles[0]);
+    append(sizeof(music_titles[1]), music_titles[1]);
+    append(sizeof(music_titles[2]), music_titles[2]);
+    Node* getN = get_node(1);
+    EXPECT_STREQ(getN->data,music_titles[1]);
+    clear();
+}
+
+TEST(TestLinkedList, First_NodeAndLast_Node){
+    //firstNode,lastNode_testcase
+    int NUM_OF_MUSIC = 3;
+    char** music_titles = NULL;
+    music_titles = (char**)malloc(sizeof(char*) * NUM_OF_MUSIC);
+    for (int i=0; i < NUM_OF_MUSIC; i++){
+        music_titles[i] = (char*)malloc(sizeof(char) * MAX_TITLE_SIZE);
+    }
+    music_titles[0] = (char*)"Hello";
+    music_titles[1] = (char*)"Enemy";
+    music_titles[2] = (char*)"abc";
+    append(sizeof(music_titles[0]), music_titles[0]);
+    append(sizeof(music_titles[1]), music_titles[1]);
+    append(sizeof(music_titles[2]), music_titles[2]);
+    Node* testFirst = first_node();
+    Node* testLast = last_node();
+    EXPECT_EQ(testFirst->data, music_titles[0]);
+    EXPECT_EQ(testLast->data, music_titles[2]);
+    clear();
+}
 
 int main(int argc, char **argv) {
     ::testing::InitGoogleTest(&argc, argv);
