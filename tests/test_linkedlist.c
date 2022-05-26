@@ -69,17 +69,56 @@ TEST(TestLinkedList, InsertOne) {
     clear();
 }
 
-/*TEST(TestLinkedList, RemoveOne) {
-    remove(nullptr);
+TEST(TestLinkedList, RemoveOne) {
+    //remove_testcase_1
     char* music_title = (char*)malloc(sizeof(char) * MAX_TITLE_SIZE);
     append(1, music_title);
     delete_by_data(music_title);
     EXPECT_EQ(size(), 0u);
-    EXPECT_EQ(first_node(), nullptr);
     clear();
-}*/
+}
 
-/*TEST(TestLinkedList, InsertAndRemoveTitles) {
+TEST(TestLinkedList, Insert_after){
+   int NUM_OF_MUSIC = 3;
+    char** music_titles = NULL;
+    music_titles = (char**)malloc(sizeof(char*) * NUM_OF_MUSIC);
+    for (int i=0; i < NUM_OF_MUSIC; i++){
+        music_titles[i] = (char*)malloc(sizeof(char) * MAX_TITLE_SIZE);
+    }
+    music_titles[0] = (char*)"Hello";
+    music_titles[1] = (char*)"Enemy";
+    music_titles[2] = (char*)"abc";
+    Node* newNode = (Node*)malloc(sizeof(Node));
+    newNode->data = (char*)"insert";
+    append(sizeof(music_titles[0]), music_titles[0]);
+    Node* cur_node = append(sizeof(music_titles[1]), music_titles[1]);
+    insert_after(cur_node, newNode);
+    append(sizeof(music_titles[2]), music_titles[2]);
+    EXPECT_EQ(size(),4);
+    clear();
+}
+
+TEST(TestLinkedList, Delete_node){
+    //deleteNode_testcase
+    int NUM_OF_MUSIC = 3;
+    char** music_titles = NULL;
+    music_titles = (char**)malloc(sizeof(char*) * NUM_OF_MUSIC);
+    for (int i=0; i < NUM_OF_MUSIC; i++){
+        music_titles[i] = (char*)malloc(sizeof(char) * MAX_TITLE_SIZE);
+    }
+    music_titles[0] = (char*)"Hello";
+    music_titles[1] = (char*)"Enemy";
+    music_titles[2] = (char*)"abc";
+    append(sizeof(music_titles[0]), music_titles[0]);
+    Node* cur_node = append(sizeof(music_titles[1]), music_titles[1]);
+    append(sizeof(music_titles[2]), music_titles[2]);
+    delete_node(cur_node);
+    EXPECT_EQ(size(),2);
+    clear();
+}
+
+TEST(TestLinkedList, InsertAndRemoveTitles) {
+    //insertAndremove_testcase
     int NUM_OF_MUSIC = 3;
     char** music_titles = NULL;
     music_titles = (char**)malloc(sizeof(char*) * NUM_OF_MUSIC);
@@ -104,7 +143,7 @@ TEST(TestLinkedList, InsertOne) {
     EXPECT_EQ(size(), 0u);
     EXPECT_EQ(empty(), true);
     clear();
-}*/
+}
 
 TEST(TestLinkedList, Append) {
 //append_testcase_2
