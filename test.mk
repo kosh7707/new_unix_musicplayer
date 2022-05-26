@@ -13,7 +13,6 @@ CPPFLAGS += -isystem $(GTEST_DIR)/include
 
 CXXFLAGS += -g -Wall -Wextra -pthread
 
-TESTS  = test_player
 SRCS  := $(wildcard $(TEST_DIR)/*.c)
 HEADERS := $(wildcard $(INCLUDE_DIR)/*.h)
 LIBS  := $(wildcard $(LIB_DIR)/*.c)
