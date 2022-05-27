@@ -30,22 +30,46 @@ char** music_titles = nullptr;
 };
 
 
-/*TEST(TestLinkedList, Empty) {
+TEST(TestLinkedList, Empty) {
+    //empty_testcase
     Node* node = first_node();
     EXPECT_EQ(node, nullptr);
     EXPECT_EQ(empty(), true);
 }
+
 TEST(TestLinkedList, EmptySize) {
+    //size_testcase
     size_t s = size();
     EXPECT_EQ(s, 0u);
 }
+
+TEST(TestLinkedList, Clear){
+    //clear_testcase
+    int NUM_OF_MUSIC = 3;
+    char** music_titles = NULL;
+    music_titles = (char**)malloc(sizeof(char*) * NUM_OF_MUSIC);
+    for (int i=0; i < NUM_OF_MUSIC; i++){
+        music_titles[i] = (char*)malloc(sizeof(char) * MAX_TITLE_SIZE);
+    }
+    music_titles[0] = (char*)"Hello";
+    music_titles[1] = (char*)"Enemy";
+    music_titles[2] = (char*)"abc";
+    append(sizeof(music_titles[0]), music_titles[0]);
+    append(sizeof(music_titles[1]), music_titles[1]);
+    append(sizeof(music_titles[2]), music_titles[2]);
+    clear();
+    EXPECT_EQ(empty(),true);
+}
+
 TEST(TestLinkedList, InsertOne) {
+    //append_testcase_1
     char* music_title = (char*)malloc(sizeof(char) * MAX_TITLE_SIZE);
     append(1, music_title);
     EXPECT_EQ(size(), 1u);
     clear();
 }
-TEST(TestLinkedList, RemoveOne) {
+
+/*TEST(TestLinkedList, RemoveOne) {
     remove(nullptr);
     char* music_title = (char*)malloc(sizeof(char) * MAX_TITLE_SIZE);
     append(1, music_title);
@@ -53,8 +77,9 @@ TEST(TestLinkedList, RemoveOne) {
     EXPECT_EQ(size(), 0u);
     EXPECT_EQ(first_node(), nullptr);
     clear();
-}
-TEST(TestLinkedList, InsertAndRemoveTitles) {
+}*/
+
+/*TEST(TestLinkedList, InsertAndRemoveTitles) {
     int NUM_OF_MUSIC = 3;
     char** music_titles = NULL;
     music_titles = (char**)malloc(sizeof(char*) * NUM_OF_MUSIC);
@@ -82,6 +107,7 @@ TEST(TestLinkedList, InsertAndRemoveTitles) {
 }*/
 
 TEST(TestLinkedList, Append) {
+//append_testcase_2
 int NUM_OF_MUSIC = 3;
 char** music_titles = NULL;
 music_titles = (char**)malloc(sizeof(char*) * NUM_OF_MUSIC);
@@ -96,10 +122,11 @@ append(sizeof(music_titles[1]), music_titles[1]);
 append(sizeof(music_titles[2]), music_titles[2]);
 EXPECT_STREQ(first_node()->data, music_titles[0]);
 EXPECT_STREQ(last_node()->data, music_titles[2]);
-//clear();
+clear();
 }
 
 TEST(TestLinkedList, AppendLeft) {
+//append_left_testcase
 int NUM_OF_MUSIC = 3;
 char** music_titles = NULL;
 music_titles = (char**)malloc(sizeof(char*) * NUM_OF_MUSIC);
@@ -114,7 +141,7 @@ append_left(sizeof(music_titles[1]), music_titles[1]);
 append_left(sizeof(music_titles[2]), music_titles[2]);
 EXPECT_STREQ(first_node()->data, music_titles[2]);
 EXPECT_STREQ(last_node()->data, music_titles[0]);
-//clear();
+clear();
 }
 
 /*TEST(TestLinkedList, NextAndPrev) {

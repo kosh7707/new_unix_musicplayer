@@ -9,23 +9,50 @@ static Node* _tail = NULL;
 static Node* _cur_node = NULL;
 
 bool empty(){
-
+    if(_head == NULL) return true;
+    else return false;
 }
 
 size_t size() {
-
+    //linked_list 원소의 개수
+    Node* temp = _head;
+    int size = 0;
+    if(empty()) return size;
+    while(temp != NULL){
+        temp = temp->next;
+        size++;
+    }
+    return size;
 }
 
 void print(){
-
+    //재생목록을 콘솔에 출력함
+    Node* temp = _head;
+    printf("LinkedList [ ");
+    while(temp != NULL){
+        printf("%s ",temp->data);
+        temp = temp->next;
+    }
+    printf("]\n");	
 }
 
 void print_file(FILE* stream){
-
+    if(stream == NULL) return;
+    char buffer[1000]={0,};
+    fread(buffer,1,sizeof(buffer),stream);
+    printf("%s",buffer);
+    fclose(stream);
 }
 
 void clear(){
-
+    //재생 목록을 비움
+    Node* temp = _head;
+    while(temp != NULL){
+        temp = temp->next;
+        free(_head);
+        _head = temp;
+    }
+    printf("LinkedList is cleared!\n");
 }
 
 Node* append_left(size_t n, char new_data[]){
