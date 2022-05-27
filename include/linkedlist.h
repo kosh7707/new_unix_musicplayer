@@ -22,4 +22,6 @@ Node* last_node();
 Node* next();
 Node* prev();
 
+Node* find_node(char *data);
+
 #endif //LINKEDLIST_LINKEDLIST_H

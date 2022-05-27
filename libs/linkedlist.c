@@ -96,12 +96,14 @@ Node* append(size_t n, char new_data[]){
     return newNode;
 }
 
-Node* _insert_after(Node* cur_node, size_t n, char new_data[]){
-
-}
-
 Node* insert_after(Node* cur_node, Node* new_node){
-
+    new_node->next = cur_node->next;
+    if(cur_node->next == NULL){
+        _tail = new_node;
+    }
+    else cur_node->next->prev = new_node;
+    cur_node->next = new_node;
+    new_node->prev = cur_node;
 }
 
 Node* pop_left(){
@@ -113,11 +115,64 @@ Node* pop(){
 }
 
 Node* delete_node(Node* cur_node){
-
+    /*Node* find = find_node(cur_node->data);
+    if(find->data != NULL){
+        delete(cur_node->data);
+        return find;
+    }
+    return cur_node;*/
+    Node* temp = _head;
+    if(empty()) return temp;//printf("empty\n");
+    else{
+        while(temp != NULL){
+            if(temp->data == cur_node->data){
+                if(_head == _tail){
+                    _head = NULL;
+                    _tail = NULL;
+                }
+                else{
+                    if(temp == _head) _head = temp->next;
+                    else temp->prev->next = temp->next;
+                    if(temp == _tail) _tail = temp->prev;
+                    else temp->next->prev = temp->prev;
+                }
+                //printf("Delete data:%s\n",temp->data);
+                free(temp);
+                return temp;
+            }
+            else temp = temp->next;
+        }
+    }
+    //printf("Delete NULL\n");
+    return temp;
 }
 
 Node* delete_by_data(char* data){
-
+    //재생 목록에서 해당 노래명을 삭제함
+    Node* temp = _head;
+    if(empty()) return temp;//printf("empty\n");
+    else{
+        while(temp != NULL){
+            if(temp->data == data){
+                if(_head == _tail){
+                    _head = NULL;
+                    _tail = NULL;
+                }
+                else{
+                    if(temp == _head) _head = temp->next;
+                    else temp->prev->next = temp->next;
+                    if(temp == _tail) _tail = temp->prev;
+                    else temp->next->prev = temp->prev;
+                }
+                //printf("Delete data:%s\n",temp->data);
+                free(temp);
+                return temp;
+            }
+            else temp = temp->next;
+        }
+    }
+    //printf("Delete NULL\n");
+    return temp;
 }
 
 Node* next(){
@@ -139,3 +194,21 @@ Node* last_node(){
 Node* get_node(size_t index){
 
 }
+
+Node* find_node(char* data){
+    Node* temp = _head;
+    if(empty()) printf("Linkedlist is empty\n");
+    else{
+        int index=1;
+        while(temp != NULL){
+            if(temp->data == data){
+                //printf("%s %d\n", temp->data,index);
+                return temp;
+            }
+                //printf("%s\n", temp->data);
+            else {temp = temp->next;index++;}
+        }
+    }
+    //printf("Find NULL\n");
+    return temp;
+};
