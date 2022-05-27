@@ -59,10 +59,11 @@ Node* append_left(size_t n, char new_data[]){
     //재생 목록의 첫 번째 위치에 노래를 추가함
     Node* newNode;
     newNode = (Node*)malloc(sizeof(Node));
-    newNode->data = new_data;
+    newNode->data = (char*)malloc(sizeof(char)*n);
+    strcpy(newNode->data, new_data);
     newNode->prev = NULL;
     newNode->next = NULL;
-    //printf("%s\n", newNode->data);
+
     if(empty()){
         _head = newNode;
         _tail = newNode;

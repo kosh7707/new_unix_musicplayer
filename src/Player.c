@@ -4,16 +4,15 @@
 
 void getCommand(char* command) {
     if (strcmp(command, "add") == 0) {
-        // add (str) --> 재생 목록의 첫 번째 위치에 노래를 추가함
-        // need insert_after()
+		char temp_data[100];
+        scanf("%s", temp_data);
+        append_left(100, temp_data);
 
     } else if (strcmp(command, "del") == 0) {
         // del (str) --> 재생 목록에서 해당 노래명을 삭제함
         // need delete_by_data()
 
     } else if (strcmp(command, "list") == 0) {
-        // 재생 목록을 출력함 --> LinkedList [ 노래명 노래명 노래명 ]
-        // need print()
         print();
         
     } else if (strcmp(command, "next") == 0) {
