@@ -176,23 +176,41 @@ Node* delete_by_data(char* data){
 }
 
 Node* next(){
-
+    //재생 목록의 다음 노래로 이동함
+    if(_cur_node == NULL) _cur_node = _head;
+    if(_cur_node->next != NULL) _cur_node = _cur_node->next;
+    return _cur_node;
 }
 
 Node* prev(){
-
+    //재생 목록의 이전 노래로 이동함
+    if(_cur_node == NULL) _cur_node = _head;
+    if(_cur_node->prev != NULL) _cur_node = _cur_node->prev;
+    return _cur_node;
 }
 
 Node* first_node(){
-
+    return _head;
 }
 
 Node* last_node(){
-
+    return _tail;
 }
 
 Node* get_node(size_t index){
+    Node* temp;
+    int count = 0;
+    if(size() == 0 || index > size()) return temp;
 
+    temp = _head;
+    while(temp != NULL){
+        if(count == index) return temp;
+        else {
+            temp = temp->next;
+            count++;
+        }
+    }
+    return temp;
 }
 
 Node* find_node(char* data){
