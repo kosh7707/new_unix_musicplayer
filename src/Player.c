@@ -14,6 +14,7 @@ void getCommand(char* command) {
     } else if (strcmp(command, "list") == 0) {
         // 재생 목록을 출력함 --> LinkedList [ 노래명 노래명 노래명 ]
         // need print()
+        print();
         
     } else if (strcmp(command, "next") == 0) {
         // 재생 목록의 다음 노래로 이동함
