@@ -80,7 +80,8 @@ Node* append(size_t n, char new_data[]){
     //연결 리스트 마지막에 노드추가
     Node* newNode;
     newNode = (Node*)malloc(sizeof(Node));
-    newNode->data = new_data;
+    newNode->data = (char*)malloc(sizeof(char)*n);
+    strcpy(newNode->data, new_data);
     newNode->prev = NULL;
     newNode->next = NULL;
 
