@@ -49,6 +49,7 @@ void clear(){
     Node* temp = _head;
     while(temp != NULL){
         temp = temp->next;
+        free(_head->data);
         free(_head);
         _head = temp;
     }
