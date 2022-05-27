@@ -36,7 +36,7 @@ void getCommand(char* command) {
     } else if (strcmp(command, "clear") == 0) {
         // 재생 목록을 비움 --> LinkedList is cleared!
         // need clear()
-
+		clear();
     } else if (strcmp(command, "quit") == 0) {
         // clear를 실행 후 뮤직 플레이어를 종료함 --> quit!
         // need clear()
