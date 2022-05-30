@@ -89,7 +89,8 @@ TEST(TestLinkedList, Insert_after){
     music_titles[1] = (char*)"Enemy";
     music_titles[2] = (char*)"abc";
     Node* newNode = (Node*)malloc(sizeof(Node));
-    newNode->data = (char*)"insert";
+    newNode->data = (char*)malloc(sizeof(char) * MAX_TITLE_SIZE);
+    strcpy(newNode->data,"insert");
     append(sizeof(music_titles[0]), music_titles[0]);
     Node* cur_node = append(sizeof(music_titles[1]), music_titles[1]);
     insert_after(cur_node, newNode);
@@ -242,8 +243,8 @@ TEST(TestLinkedList, First_NodeAndLast_Node){
     append(sizeof(music_titles[2]), music_titles[2]);
     Node* testFirst = first_node();
     Node* testLast = last_node();
-    EXPECT_EQ(testFirst->data, music_titles[0]);
-    EXPECT_EQ(testLast->data, music_titles[2]);
+    EXPECT_STREQ(testFirst->data, music_titles[0]);
+    EXPECT_STREQ(testLast->data, music_titles[2]);
     clear();
 }
 
