@@ -1,0 +1,10 @@
+#include "textfilewriter.h"
+
+void write_file(char* file_name){
+	
+	FILE* stream = fopen(file_name, "a");
+	char musicTitle[51];
+	fgets(musicTitle, sizeof(musicTitle), stdin);
+	fputs(musicTitle, stream);
+	fclose(stream);
+}
