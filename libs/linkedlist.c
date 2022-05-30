@@ -118,12 +118,6 @@ Node* pop(){
 }
 
 Node* delete_node(Node* cur_node){
-    /*Node* find = find_node(cur_node->data);
-    if(find->data != NULL){
-        delete(cur_node->data);
-        return find;
-    }
-    return cur_node;*/
     Node* temp = _head;
     if(empty()) return temp;//printf("empty\n");
     else{
@@ -221,16 +215,19 @@ Node* find_node(char* data){
     Node* temp = _head;
     if(empty()) printf("Linkedlist is empty\n");
     else{
+        //1~n n = 노드의 전체개수
         int index=1;
         while(temp != NULL){
-            if(temp->data == data){
-                //printf("%s %d\n", temp->data,index);
+	    if(strcmp(temp->data,data) == 0) {
+                printf("node:%s position:%d\n", temp->data,index);
                 return temp;
             }
-                //printf("%s\n", temp->data);
-            else {temp = temp->next;index++;}
+            else {
+                temp = temp->next;
+                index++;
+            }
         }
     }
-    //printf("Find NULL\n");
+    printf("Not Found\n");
     return temp;
 };
