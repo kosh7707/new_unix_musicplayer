@@ -156,7 +156,8 @@ Node* delete_by_data(char* data){
     if(empty()) return temp;//printf("empty\n");
     else{
         while(temp != NULL){
-            if(temp->data == data){
+        	// use strcmp --> if equal return 0
+            if(strcmp(temp->data, data) == 0){
                 if(_head == _tail){
                     _head = NULL;
                     _tail = NULL;

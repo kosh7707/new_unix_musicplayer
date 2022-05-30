@@ -9,8 +9,9 @@ void getCommand(char* command) {
         append_left(100, temp_data);
 
     } else if (strcmp(command, "del") == 0) {
-        // del (str) --> 재생 목록에서 해당 노래명을 삭제함
-        // need delete_by_data()
+        char temp_data[100];
+        scanf("%s", temp_data);
+        delete_by_data(temp_data);
 
     } else if (strcmp(command, "list") == 0) {
         print();
