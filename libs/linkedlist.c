@@ -110,7 +110,20 @@ Node* insert_after(Node* cur_node, Node* new_node){
 }
 
 Node* pop_left(){
-
+    //Delete first_node which is head
+    Node* temp = _head;
+    if(empty()) return temp;
+    if(_head == _tail){
+        _head = NULL;
+        _tail = NULL;
+    }
+    else{
+        _head->next->prev = NULL;
+        _head = _head->next;
+    }
+    //free(temp->data);
+    //free(temp);
+    return temp;
 }
 
 Node* pop(){

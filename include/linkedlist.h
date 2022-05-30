@@ -21,6 +21,8 @@ Node* first_node();
 Node* last_node();
 Node* next();
 Node* prev();
+Node* pop_left();
+Node* pop();
 
 Node* find_node(char *data);
 

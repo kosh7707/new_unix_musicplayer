@@ -250,7 +250,7 @@ TEST(TestLinkedList, First_NodeAndLast_Node){
 
 TEST(TestLinkedList, FindNode){
     //FindNode_testcase
-    int NUM_OF_MUSIC = 4;
+    int NUM_OF_MUSIC = 3;
     char** music_titles = NULL;
     music_titles = (char**)malloc(sizeof(char*) * NUM_OF_MUSIC);
     for (int i=0; i < NUM_OF_MUSIC; i++){
@@ -270,6 +270,29 @@ TEST(TestLinkedList, FindNode){
     EXPECT_STREQ(temp->data, music_titles[0]); 
     clear();
 }
+
+TEST(TestLinkedList, PopLeft){
+    //pop_left_testcase
+    int NUM_OF_MUSIC = 3;
+    char** music_titles = NULL;
+    music_titles = (char**)malloc(sizeof(char*) * NUM_OF_MUSIC);
+    for (int i=0; i < NUM_OF_MUSIC; i++){
+        music_titles[i] = (char*)malloc(sizeof(char) * MAX_TITLE_SIZE);
+    }
+    music_titles[0] = (char*)"Hello";
+    music_titles[1] = (char*)"Enemy";
+    music_titles[2] = (char*)"abc";
+    append(sizeof(music_titles[0]), music_titles[0]);
+    append(sizeof(music_titles[1]), music_titles[1]);
+    append(sizeof(music_titles[2]), music_titles[2]);
+    Node* temp = pop_left(); 
+    EXPECT_STREQ(temp->data, music_titles[0]);
+    free(temp->data);
+    free(temp);
+    EXPECT_EQ(size(),2);
+    clear();
+}
+
 
 int main(int argc, char **argv) {
     ::testing::InitGoogleTest(&argc, argv);
