@@ -75,6 +75,7 @@ Node* append_left(size_t n, char new_data[]){
         _head = newNode;
     }
     //printf("%s\n", _head->data);
+    _cur_node = _head;
     return newNode;
 }
 
@@ -96,17 +97,21 @@ Node* append(size_t n, char new_data[]){
         newNode->prev = _tail;
         _tail = newNode;
     }
+    _cur_node = _head;
     return newNode;
 }
 
 Node* insert_after(Node* cur_node, Node* new_node){
-    new_node->next = cur_node->next;
     if(cur_node->next == NULL){
         _tail = new_node;
     }
-    else cur_node->next->prev = new_node;
-    cur_node->next = new_node;
-    new_node->prev = cur_node;
+    new_node->next = cur_node->next;
+	new_node->prev = cur_node;
+	new_node->next->prev = new_node;
+	cur_node->next = new_node;
+	
+    return new_node;
+
 }
 
 Node* pop_left(){
@@ -145,8 +150,8 @@ Node* pop(){
 
 Node* delete_node(Node* cur_node){
     Node* temp = _head;
-    if(empty()) return temp;//printf("empty\n");
-    else{
+    if(empty()) return temp;
+    else {
         while(temp != NULL){
             if(temp->data == cur_node->data){
                 if(_head == _tail){
@@ -160,7 +165,6 @@ Node* delete_node(Node* cur_node){
                     else temp->next->prev = temp->prev;
                 }
                 //printf("Delete data:%s\n",temp->data);
-                free(temp);
                 return temp;
             }
             else temp = temp->next;
@@ -201,14 +205,12 @@ Node* delete_by_data(char* data){
 
 Node* next(){
     //재생 목록의 다음 노래로 이동함
-    if(_cur_node == NULL) _cur_node = _head;
     if(_cur_node->next != NULL) _cur_node = _cur_node->next;
     return _cur_node;
 }
 
 Node* prev(){
     //재생 목록의 이전 노래로 이동함
-    if(_cur_node == NULL) _cur_node = _head;
     if(_cur_node->prev != NULL) _cur_node = _cur_node->prev;
     return _cur_node;
 }
@@ -222,11 +224,10 @@ Node* last_node(){
 }
 
 Node* get_node(size_t index){
-    Node* temp;
-    int count = 0;
+    Node* temp = _head;
+    size_t count = 0;
     if(size() == 0 || index > size()) return temp;
 
-    temp = _head;
     while(temp != NULL){
         if(count == index) return temp;
         else {

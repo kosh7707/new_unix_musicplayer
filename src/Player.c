@@ -2,7 +2,12 @@
 #include "textfilewriter.h"
 #include <string.h>
 
+int last_node_idx = 0;
+int cur_node_idx = 0;
+int stop = 0;
+
 void getCommand(char* command) {
+	last_node_idx = size();
     if (strcmp(command, "add") == 0) {
 		char temp_data[100];
         scanf("%s", temp_data);
@@ -17,31 +22,35 @@ void getCommand(char* command) {
         print();
         
     } else if (strcmp(command, "next") == 0) {
-        // 재생 목록의 다음 노래로 이동함
-        // need next()
+    	if (cur_node_idx < last_node_idx - 1) cur_node_idx++;
+        next();
         
-
     } else if (strcmp(command, "prev") == 0) {
-        // 재생 목록의 이전 노래로 이동함
-        // need prev()
-
+    	if (cur_node_idx > 0) cur_node_idx--;
+		prev();
+		
     } else if (strcmp(command, "move") == 0) {
-        // move (int) --> 현재 노래를 (int)의 다음 위치로 이동시킴
-        // 가->나->다->라 에서 현재가 '나' 일때 move 4 하면 가->다->라->나
-        // need get_node(), insert_after()
+        int temp_2;
+        scanf("%d", &temp_2);
+        Node* new_node = get_node(cur_node_idx);
+        delete_node(new_node);
+        insert_after(get_node(temp_2-2), new_node);
+        cur_node_idx = temp_2-1;
 
     } else if (strcmp(command, "play") == 0) {
-        // 노래를 재생함 --> [노래명] is now playing!
-        // need get_node()
-
+        Node* temp_node = get_node(cur_node_idx);
+        printf("%s is now playing!\n", temp_node->data);
+		
     } else if (strcmp(command, "clear") == 0) {
-        // 재생 목록을 비움 --> LinkedList is cleared!
-        // need clear()
 		clear();
+		cur_node_idx = 0;
+		last_node_idx = 0;
+		
     } else if (strcmp(command, "quit") == 0) {
-        // clear를 실행 후 뮤직 플레이어를 종료함 --> quit!
-        // need clear()
-
+        stop = 1;
+        clear();
+        printf("quit!\n");
+        
     } else if (strcmp(command, "load") == 0) {
         // 파일에 저장된 내용을 읽고 재생 목록을 생성함
         // need read_file()
@@ -63,9 +72,8 @@ int main() {
         scanf("%s", temp_data);
         append(100, temp_data);
     }
-
     scanf("%d", &N);
-    while (N --> 0) {
+    while (N --> 0 && stop != 1) {
         char command[100];
         scanf("%s", command);
 		getCommand(command);
